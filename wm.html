@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html>
+    <head>
+
+<style type="text/css">
+  html { height: 100% }
+  body { height: 100%; margin: 0; padding: 0 }
+  #map_canvas { height: 100% }
+</style>
+<script type="text/javascript"
+  src=
+"http://maps.googleapis.com/maps/api/js?key=AIzaSyARty0A8ycHe2WvZ8kxrR4ATyD5ZROEu2I&sensor=false">
+</script>
+<script type="text/javascript">
+
+var locations = [
+  ['Baird', 38.4383293, -105.24850839999999, '<b>Chaplain Marcus Baird: Good News Jail & Prison Ministry Chaplain<br>at Colorado Minimum Centers which consists<br>of 3 minimum prisons Arrowhead, Fourmile, and Skyline<br><a href="https://drive.google.com/open?id=1W9Klp53RkETGIbG6jvR-cZQmKN0dhklo">Missionary Summary</a></b>'],
+  ['Bock', 42.70867, 19.37438, '<b></b>'],
+  ['CCLC', 41.76858790409797, -87.6220751609518, '<b>Chicago City Life Center:'],
+  ['COH', 37.182749300000026, -93.27770229999999, '<b>Convoy of Hope:'],
+  ['Covert', 38.62438110000003, -90.1525211, '<b>Jay & Cinnamon Covert'],
+  ['Davis', -2.892814700000016, -78.97296040000003, ],
+  ['Diaz', -2.9171540000000027, -79.0346146, ],
+  ['Garner', 14.604847200000007, 120.97595079999996, ],
+  ['Goodrich', -25.74786759999999, 28.22927119999997, ],
+  ['GTM', 28.5365761, -81.38053890000003, '<b>Jim & Sunny Peters ministry to Wounded Warriors<br><a href="https://drive.google.com/open?id=1T14VNynnFuCclPOlH8f4_37oob5zUe2W">Missionary Summary</a></br></b>'],
+  ['Holder', 29.945415200000028, -90.09887700000002, ],
+  ['Knoles', 33.54997890000002, -112.18620299999998, ],
+  ['Marsh', 40.4218604, -3.7023926, 'Marsh'],
+  ['Miller', 50.84844000000003, 4.3529892000000245, 'Miller'],
+  ['MorningStar', 41.5351168509876, -88.12470609834088, ],
+  ['Nordquist', 41.5183559, -88.14056340000002, ],
+  ['Pettenger', -30.83249, 30.3839, ],
+  ['Tarr', 14.737034500000002, -17.46173859999999, ],
+  ['VIVE', 41.89179940000002, -87.63278960000002, ],
+  ['Walent', 53.279379399999996, 9.72496030000002, 'Wallent'],
+  ['UNNAMED', 32.435613000000004, 33.85986330000003, ],
+  ['UNNAMED', 19.145169500000016, 89.12109379999993, ],
+  ['UNNAMED', 14.944784900000005, 93.16405710000004, ],
+  ['Ghana', 6.589015652780423, 0.4721863531322015, 'Nyalota Cluster Bible Translation Project:<br><a href="https://drive.google.com/open?id=1EgawGh-zmx9dkFCZ88kWGTMzi5vW3tF7">Project Summary</a></br>']
+  ];
+
+  function initialize() {
+
+    var myOptions = {
+      center: new google.maps.LatLng(26.397, 10.5485399),
+      zoom: 2.05,
+      mapTypeId: google.maps.MapTypeId.ROADMAP
+
+    };
+    var map = new google.maps.Map(document.getElementById("default"),
+        myOptions);
+
+    setMarkers(map,locations)
+
+  }
+
+
+
+  function setMarkers(map,locations){
+
+      var marker, i
+
+for (i = 0; i < locations.length; i++)
+ {  
+
+ var name = locations[i][0]
+ var lat = locations[i][1]
+ var long = locations[i][2]
+ var add =  locations[i][3]
+
+ latlngset = new google.maps.LatLng(lat, long);
+
+  var marker = new google.maps.Marker({  
+          map: map, title: name , position: latlngset  
+        });
+        //map.setCenter(marker.getPosition())
+
+
+        var content = " " +  '</h3>' + " " + add     
+
+  var infowindow = new google.maps.InfoWindow()
+
+google.maps.event.addListener(marker,'click', (function(marker,content,infowindow){ 
+        return function() {
+           infowindow.setContent(content);
+           infowindow.open(map,marker);
+        };
+    })(marker,content,infowindow)); 
+
+  }
+  }
+
+
+
+  </script>
+ </head>
+ <body onload="initialize()">
+  <div id="default" style="width:100%; height:100%"></div>
+ </body>
+  </html>
